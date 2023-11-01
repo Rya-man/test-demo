@@ -15,7 +15,7 @@ class node
         next = f;
     }  
 };
-void traversal(node* head)
+void printlist(node* head)
 {
     while(head)
     {
@@ -32,7 +32,7 @@ int main()
     head->next= n1;
     n1->next=n2;
     cout<<'\n';
-    traversal(head);
+    printlist(head);
 
 
 }  
