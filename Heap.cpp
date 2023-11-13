@@ -59,11 +59,35 @@ void MaxHeap::insertkey(int x)
     heapsize++;
     int i= heapsize-1;
     arr[i]=x;
-    while(i!=0&& arr[parent(i)]<arr[i])
+    while(i!=0 && arr[parent(i)]<arr[i])
     {
         swap(arr[parent(i)],arr[i]);
         i=parent(i);
     }
-
-
+}
+void MaxHeap::increasekey(int i,int val)
+{
+    arr[i]=val;
+    while(i>0 && arr[parent(i)]<arr[i])
+    {
+        swap(arr[parent(i)],arr[i]);
+        i=parent(i); 
+    }
+}
+int MaxHeap::removeMax()
+{
+    if(heapsize<=0)
+    {
+        return INT_MIN;
+    }
+    if(heapsize==1)
+    {
+        heapsize--;
+        return arr[0];
+    }
+    int root = arr[0];
+    arr[0]=arr[heapsize-1];
+    heapsize--;
+    MaxHeapify(0);
+    return root;
 }
