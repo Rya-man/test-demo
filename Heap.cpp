@@ -22,6 +22,7 @@ class MaxHeap{
         return heapsize;
     }
     void deletekey(int i);
+    void mydeletekey(int i);
     void insertkey(int i);
 };
 MaxHeap::MaxHeap(int a)
@@ -90,4 +91,35 @@ int MaxHeap::removeMax()
     heapsize--;
     MaxHeapify(0);
     return root;
+}
+void MaxHeap::mydeletekey(int i)
+{
+    
+    arr[i]=arr[lchild(i)]>arr[rchild(i)]?arr[lchild(i)]:arr[rchild(i)];
+    if(arr[lchild(i)]==arr[i])
+    {
+        mydeletekey(lchild(i));
+    }
+    if(arr[rchild(i)]==arr[i])
+    {
+        mydeletekey(rchild(i));
+    }
+    
+}
+void MaxHeap::deletekey(int i)
+{
+    increasekey(i,INT_MAX);
+    removeMax();
+}
+int main()
+{
+    MaxHeap h(15);
+    int k,i,n=6,ARR[10];
+    h.insertkey(3);
+    h.insertkey(6);
+    h.insertkey(10);
+    h.insertkey(12); 
+    h.insertkey(8); 
+    h.insertkey(2); 
+    return 0;
 }
