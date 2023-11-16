@@ -5,7 +5,7 @@ void heapify(int arr[],int N,int i)
 {
     int largest = i;
     int l= 2*i+1;
-    int r= 2*i+1;
+    int r= 2*i+2;
     if(l<N and arr[l]>arr[largest])
         largest= l;
     if(r<N and arr[r]>arr[largest])
