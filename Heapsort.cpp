@@ -10,11 +10,7 @@ void heapify(int arr[],int N,int i)
         largest= l;
     if(r<N and arr[r]>arr[largest])
         largest=r;
-    if(largest!=i){
-        swap(arr[i],arr[largest]);
-        heapify(arr,N,largest);
     }
-}
 void heapSort(int *arr,int N)
 {
     for(int i=N/2-1;i>=0;i--)
@@ -48,5 +44,6 @@ int main()
     heapSort(arr,a);
     cout<<"\n\n\nSorted array is\n";
     Printarray(arr,a);
+    delete[] arr;
     return 0;
 }
