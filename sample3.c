@@ -3,30 +3,31 @@
 #include<stdbool.h>
 #include<stdlib.h>
 #include<math.h>
+// This program was made by Aryaman Prakash
 struct Stack{
     int top;
     int capacity;
     int *arr;
-};
+};// This program was made by Aryaman Prakash
 struct Stack* CreateStack(unsigned capacity){
     struct Stack *S = (struct Stack*)malloc(sizeof(struct Stack));
     S->capacity= capacity;
     S->top=-1;
     S->arr= (int*)malloc(S->capacity*sizeof(int));
     return S;
-};
+};// This program was made by Aryaman Prakash
 bool isfull(struct Stack *s)
 {
     if(s->top==s->capacity)
     return true;
     else return false;
-}
+}// This program was made by Aryaman Prakash
 bool isempty(struct Stack*s)
 {
     if(s->top==-1)
     return true;
     else return false;
-}
+}// This program was made by Aryaman Prakash
 void push(struct Stack *S,int a)
 {
     if(isfull(S))
@@ -36,7 +37,7 @@ void push(struct Stack *S,int a)
     }
     S->arr[++S->top] =a;
     printf("\n%d Pushed to the stack\n",a);
-}
+}// This program was made by Aryaman Prakash
 int pop(struct Stack *S)
 {
     int a= S->arr[S->top];
@@ -46,7 +47,7 @@ int pop(struct Stack *S)
     }
     S->top--;
     return a;
-}
+}// This program was made by Aryaman Prakash
 bool palindrome(int a,int maxsize)
 {
     int temp = a;
@@ -67,11 +68,11 @@ bool palindrome(int a,int maxsize)
     }
 
     return reversed == a;   
-}
+}// This program was made by Aryaman Prakash
 void StackStatus(struct Stack *s)
 {
-    printf("\nThe stack has %d elements\nThe stack capacity is %d\n",s->top +1,s->capacity);
-}
+    printf("\nThe stack has %d elements\nThe stack capacity is %d\n",s->top +1,s->capacity+1);
+}// This program was made by Aryaman Prakash
 int main()
 {
     int maxsize,n;
@@ -92,11 +93,11 @@ int main()
             case 6: StackStatus(S);break;
             case 7: free(S->arr);
                     free(S);
-                    printf("Exiting...\n"); return;
+                    printf("Exiting...\n"); return 0;
             default: printf("\nWrong option\n");
         }
     }while(true);
     free(S->arr);
     free(S);
     return 0;
-}
+}// This program was made by Aryaman Prakash
