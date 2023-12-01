@@ -56,12 +56,13 @@ int pop(struct Stack *S)
 //This program was made by Aryaman Prakash
 void displaystack(struct Stack *S)
 {
-    if(isempty(S))
+    struct Stack temp = *S;
+    if(isempty(&temp))
     {
         return;
     }
-    printf("%d ",pop(S));
-    displaystack(S);
+    printf("%d ",pop(&temp));
+    displaystack(&temp);
     
 }
 //This program was made by Aryaman Prakash
