@@ -1,68 +1,85 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
-struct Employee {
-    char Emp_Name[100];
-    char Emp_id[10];
-    char Emp_department[50];
-    float Emp_salary;
+#include<limits.h>
+#include<stdio.h>
+#include<stdbool.h>
+#include<stdlib.h>
+struct Stack{
+    int top;
+    int capacity;
+    int *arr;
 };
-
-void readdata(struct Employee *a, int index) {
-    printf("\nEnter details for Employee %d:\n", index + 1);
-    printf("Enter name: ");
-    scanf("%s", a->Emp_Name);
-    printf("Enter id: ");
-    scanf("%s", a->Emp_id);
-    printf("Enter department: ");
-    scanf("%s", a->Emp_department);
-    printf("Enter salary: ");
-    scanf("%f", &a->Emp_salary);
+struct Stack* CreateStack(unsigned capacity){
+    struct Stack *S = (struct Stack*)malloc(sizeof(struct Stack));
+    S->capacity= capacity;
+    S->top=-1;
+    S->arr= (int*)malloc(S->capacity*sizeof(int));
+    return S;
+};
+bool isfull(struct Stack *s)
+{
+    if(s->top==s->capacity)
+    return true;
+    else return false;
 }
-
-float total(struct Employee *a, int n, char dep[]) {
-    float sum = 0;
-    for (int i = 0; i < n; i++) {
-        if (strcmp(a[i].Emp_department, dep) == 0) {
-            sum += a[i].Emp_salary;
+bool isempty(struct Stack*s)
+{
+    if(s->top==-1)
+    return true;
+    else return false;
+}
+void push(struct Stack *S,int a)
+{
+    if(isfull(S))
+    {
+        printf("Stack Overflow");
+        return;
+    }
+    S->arr[++S->top] =a;
+    printf("\n%d Pushed to the stack\n",a);
+}
+int pop(struct Stack *S)
+{
+    int a= S->arr[S->top];
+    if(isempty(S))
+    {
+        return INT_MIN;
+    }
+    S->top--;
+    return a;
+}
+void displaystack(struct Stack *S)
+{
+    if(isempty(S))
+    {
+        return;
+    }
+    printf("%d ",pop(S));
+    displaystack(S);
+    
+}
+int main()
+{
+    int maxsize,n;
+    printf("ENter the max size of the stack\n");
+    scanf("%d",&maxsize);
+    int parameter;
+    struct Stack *S=CreateStack(maxsize);
+    do{
+        printf("\nSelect the Function to be performed:\n1. Push element on top of the stack\n2. Pop the element from the top of the stack\n3. Overflow\n4. Underflow\n5. DIsplay Stack\n6. Exit\n\n\n");
+        scanf("%d",&parameter);
+        switch(parameter)
+        {
+            case 1: printf("ENter the number to be pushed\t");scanf("%d",&n);push(S,n);break;
+            case 2: printf("\n%d\n",pop(S));break;
+            case 3: isfull(S)?printf("\nSTack Overflow condition satisfied\n"):printf("\nStack Overflow condition not satisfied\n");break;
+            case 4: isempty(S)?printf("\nSTack Underflow condition satisfied\n"):printf("\nStack Underflow condition not satisfied\n");break;
+            case 5: displaystack(S);break;
+            case 6: free(S->arr);
+                    free(S);
+                    printf("Exiting...\n"); return 0;
+            default: printf("\nWrong option\n");
         }
-    }
-    return sum;
-}
-
-void display(struct Employee *a, int n) {
-    printf("\nEmployee Details:\n");
-    for (int i = 0; i < n; i++) {
-        printf("Employee %d Name: %s\nEmployee %d id: %s\nEmployee %d Department: %s\nEmployee %d Salary: %f\n\n",
-               i + 1, a[i].Emp_Name, i + 1, a[i].Emp_id, i + 1, a[i].Emp_department, i + 1, a[i].Emp_salary);
-    }
-}
-
-int main() {
-    int n;
-    printf("Enter number of employees: ");
-    scanf("%d", &n);
-
-    struct Employee *employees = malloc(n * sizeof(struct Employee));
-    if (employees == NULL) {
-        printf("Memory allocation failed.\n");
-        return -1;
-    }
-
-    for (int i = 0; i < n; i++) {
-        readdata(&employees[i], i);
-    }
-
-    char dep[50];
-    printf("\nEnter department to find the total salary: ");
-    scanf("%s", dep);
-
-    float total_salary = total(employees, n, dep);
-    printf("\nTotal salary for department %s: %.2f\n", dep, total_salary);
-
-    display(employees, n);
-
-    free(employees); // Free dynamically allocated memory
+    }while(true);
+    free(S->arr);
+    free(S);
     return 0;
 }
