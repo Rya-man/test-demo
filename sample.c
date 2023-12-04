@@ -1,4 +1,5 @@
 #include<stdio.h>
+#include<stdlib.h>
 #include<conio.h>
 void arraydefinition(int* n, int x)
 {
@@ -59,10 +60,11 @@ void deletion(int *n,int *x)
 }
 int main()
 {
-    int x,arr[100];
+    int x;
     int a = -1;
     printf("ENter array size\n");
     scanf("%d",&x);
+    int *arr=(int*)malloc(x*sizeof(int));
     arraydefinition(arr,x);
     do
     {
@@ -73,10 +75,10 @@ int main()
             case 1: display(arr,x);break;
             case 2: insertion(arr,&x);break;
             case 3: deletion(arr,&x);break;
-            case 4: display(arr,x); return 0;
+            case 4: display(arr,x); free(arr); return 0;
             default: printf("\n\nenter a valid command\n");
-
         }
     }while(1);
+    free(arr);
     return 0;
 }
