@@ -21,7 +21,7 @@ int fibi(int n)
     {
         ans[i]=-1;
     }
-    fib(n,ans);
+    return fib(n,ans);
 }
 int main()
 {
