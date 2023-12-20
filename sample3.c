@@ -121,4 +121,3 @@ int main()
     free(S);
     return 0;
 }
-//This program was made by Aryaman Prakash
