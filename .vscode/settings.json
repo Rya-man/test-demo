@@ -2,6 +2,7 @@
     "files.associations": {
         "*.tcc": "c",
         "streambuf": "c",
-        "syncstream": "c"
+        "syncstream": "c",
+        "iostream": "cpp"
     }
 }
