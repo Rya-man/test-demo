@@ -49,7 +49,7 @@ int delete(struct Circularqueue* queue)
         }
         else
         {
-                queue->front= ++(queue->front)/queue->maxsize;
+                queue->front= ++(queue->front)%queue->maxsize;
         }
         return val;
 }
