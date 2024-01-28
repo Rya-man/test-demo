@@ -82,7 +82,7 @@ int main() {
             value = delete(queue);
             if (value != -1)
                 printf("\ndeleted value = %d\n", value);
-        } else if (choice == 3) {
+        } else if (choice ==3) {
             display(queue);
         } else if (choice == 4) {
             free(queue->data);
