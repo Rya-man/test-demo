@@ -97,5 +97,5 @@ int main()
             root->right->left->right = new BinaryTreeNode(13);
             root->right->right->left = new BinaryTreeNode(14);
             root->right->right->right = new BinaryTreeNode(15);
-    root->PostOrder(root);
+    root->InOrder(root);
 }
