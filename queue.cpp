@@ -103,7 +103,6 @@ int main()
             if(isfull(queue))
             {
                 cout<<"\nQueue is full";
-                // cout<<"\nQueue size is "<<Size(queue);
             }
             if(isempty(queue))
             {
