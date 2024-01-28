@@ -57,7 +57,6 @@ void display(struct Circularqueue* queue) {
         for (i = queue->front; i != (queue->rear + 1) % queue->maxsize; i = (i + 1) % queue->maxsize) {
             printf("%d ", queue->data[i]);
         }
-
         printf("\nRear = %d\n", queue->rear);
     }
 }
