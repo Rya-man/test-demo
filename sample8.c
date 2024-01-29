@@ -52,16 +52,14 @@ void display(struct Circularqueue* queue) {
     if (queue->front == -1)
         printf("\nEmpty queue\n");
     else {
-        printf("\nfront = %d\n", queue->front);
-        printf("\nItems:\t");
+        printf("\nFront = %d\n", queue->front);
+        printf("Items:\t");
         for (i = queue->front; i != (queue->rear + 1) % queue->maxsize; i = (i + 1) % queue->maxsize) {
             printf("%d ", queue->data[i]);
         }
-        printf("\nRear = %d\n", queue->rear);
+        printf("\nRear = %d\n\n", queue->rear);
     }
 }
-
-
 
 int main() {
     int n;
