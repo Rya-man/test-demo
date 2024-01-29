@@ -18,7 +18,7 @@ struct Circularqueue* createqueue(int n) {
 }
 
 void insert(int value, struct Circularqueue* queue) {
-    if ((queue->front == 0 && (queue->rear + 1) % queue->maxsize == queue->front) || (queue->rear + 1) % queue->maxsize == queue->front) {
+    if ((queue->front == 0 && (queue->rear + 1) % queue->maxsize == queue->front) || ((queue->rear + 1) % queue->maxsize == queue->front)) {
         printf("Queue is full\n");
         return;
     }
