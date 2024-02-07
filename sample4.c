@@ -1,73 +1,79 @@
-#include<stdlib.h>
 #include<stdio.h>
-#include<stdbool.h>
-#include<string.h>
-struct Stack{
-    char *arr;
+#include<stdlib.h>
+struct stack{
+    char* arr;
     int top;
     int capacity;
 };
-struct Stack* CreateStack(unsigned capacity){
-    struct Stack *S = (struct Stack*)malloc(sizeof(struct Stack));
-    S->capacity= capacity;
+struct stack* CreateStack(int cap){
+    struct stack* S =(struct stack*)malloc(sizeof(struct stack));
     S->top=-1;
-    S->arr= (char*)malloc(S->capacity*sizeof(char));
-    return S;
-};
-bool isfull(struct Stack *s)
-{
-    if(s->top==s->capacity)
-    return true;
-    else return false;
+    S->capacity=cap;
+    S->arr=(char*)malloc(cap* sizeof(char));
 }
-bool isempty(struct Stack*s)
+void push(struct stack *S,char a)
 {
-    if(s->top==-1)
-    return true;
-    else return false;
+    if((S->top)+1==S->capacity)
+    return;
+    S->arr[++(S->top)]=a;
 }
-void push(struct Stack *S,char a)
+char pop(struct stack *S)
 {
-    if(isfull(S))
-    {
-        printf("Stack Overflow");
-        return;
-    }
-    S->arr[++S->top] =a;
-    printf("\n%d Pushed to the stack\n",a);
+    if(S->top!=-1)
+    return S->arr[(S->top)--];
 }
-char pop(struct Stack *S)
+char peek(struct stack* S)
 {
-    int a= S->arr[S->top];
-    if(isempty(S))
-    {
-        return '\0';
-    }
-    S->top--;
-    return a;
+    if(S->top!=-1)
+    return S->arr[S->top];
 }
-int priority(char x,struct Stack *S)
+int priority(char x)
 {
-
+    if(x=='(')
+    return 0;
+    if(x=='+'||x=='-')
+    return 1;
+    if(x=='*'||x=='/')
+    return 2;
+    if(x=='$'||x=='^')
+    return 3;
+    return 0;
 }
 int main()
 {
     int maxsize;
     char *e;
-    printf("Enter the max size of the expression\n");
+    char x;
+    printf("ENter the max size of the expression\n");
     scanf("%d",&maxsize);
-    char *exp = (char*)malloc(sizeof(char)*maxsize);
-    struct Stack *S=CreateStack(maxsize);
-    printf("enter the infix expression\n");
+    char *exp =(char*)malloc(maxsize*sizeof(char));
+    struct stack* S =CreateStack(maxsize);
+    printf("\nEnter the infix expression\n");
     scanf("%s",exp);
     e=exp;
-    while(*e!='\0')
+    while(*e!=0)
     {
         if(isalnum(*e))
-            printf(" %c ",*e);
-        else if(*e=='(' || *e=='{' || *e=='[' )
+        printf("%c",*e);
+        else if(*e =='(')
+        push(S,*e);
+        else if(*e==')')
         {
+            while((x=pop(S))!='(')
+            printf("%d",x);
+        }
+        else{
+            while(priority(peek(S))>=priority(*e))
+            printf("%c",pop(S));
             push(S,*e);
         }
+        e++;
     }
+    while(S->top!=-1)
+    {
+        printf("%c",pop(S));
+
+    }
+    printf("\n\n");
+    return 0;
 }
