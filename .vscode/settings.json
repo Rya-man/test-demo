@@ -3,6 +3,19 @@
         "*.tcc": "c",
         "streambuf": "c",
         "syncstream": "c",
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "charconv": "c",
+        "chrono": "c",
+        "expected": "c",
+        "optional": "c",
+        "format": "c",
+        "ratio": "c",
+        "system_error": "c",
+        "array": "c",
+        "functional": "c",
+        "regex": "c",
+        "tuple": "c",
+        "type_traits": "c",
+        "utility": "c"
     }
 }
