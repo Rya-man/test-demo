@@ -8,7 +8,7 @@ struct Stack{
     int capacity;
     int *arr;
 };
-//This program was made by Aryaman Prakash
+//This program was made by Aryaman Prakash                                                                                                                                                         
 struct Stack* CreateStack(unsigned capacity){
     struct Stack *S = (struct Stack*)malloc(sizeof(struct Stack));
     S->capacity= capacity;
