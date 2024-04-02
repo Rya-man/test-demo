@@ -21,14 +21,7 @@ int binsearch(int* arr,int val,int left,int right)
 
 }
 
-void toh(int n,char A,char B,char C)
-{
-    if(n==1){
-    printf("Step %d moved from %c to %c\n",A,C);
-    return;
-    }
-    toh(n-1,)
-}
+
 
 void move(int n, char source, char target, char auxiliary) {
     if (n == 1) {

@@ -42,7 +42,6 @@ int priority(char x)
 int main()
 {
     int maxsize;
-    char *e;
     char x;
     printf("ENter the max size of the expression\n");
     scanf("%d",&maxsize);
@@ -50,24 +49,24 @@ int main()
     struct stack* S =CreateStack(maxsize);
     printf("\nEnter the infix expression\n");
     scanf("%s",exp);
-    e=exp;
-    while(*e!=0)
+    int i=0;
+    while(exp[i]!='\0')
     {
-        if(isalnum(*e))
-        printf("%c",*e);
-        else if(*e =='(')
-        push(S,*e);
-        else if(*e==')')
+        if(isalnum(exp[i]))
+        printf("%c",exp[i]);
+        else if(exp[i] =='(')
+        push(S,exp[i]);
+        else if(exp[i]==')')
         {
             while((x=pop(S))!='(')
             printf("%d",x);
         }
         else{
-            while(priority(peek(S))>=priority(*e))
+            while(priority(peek(S))>=priority(exp[i]))
             printf("%c",pop(S));
-            push(S,*e);
+            push(S,exp[i]);
         }
-        e++;
+        i++;
     }
     while(S->top!=-1)
     {

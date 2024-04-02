@@ -22,7 +22,7 @@ stack* Createstack() {
     stack* s = (stack*)malloc(sizeof(stack));
     s->top = NULL; // Initialize top to NULL
     return s;
-}
+} 
 
 void push(stack* s, int d) {
     if (!s) {
