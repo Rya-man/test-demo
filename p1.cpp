@@ -12,7 +12,7 @@ auto initialize = []() {
 }();
 
 
-pair<li,double>  euclidgcd1(li a,li b)
+pair<li,double>  euclidgcd2(li a,li b)
 {
         clock_t s,e;
         s = clock();
@@ -21,7 +21,7 @@ pair<li,double>  euclidgcd1(li a,li b)
         if(!temp)
         {
                 e=clock();
-                return {b,double((e-s)/(CLOCKS_PER_SEC*1000))};
+                return {b,double(e-s)/CLOCKS_PER_SEC*1000};
         }
         while(temp!= 0)
         {
@@ -30,7 +30,7 @@ pair<li,double>  euclidgcd1(li a,li b)
                 b= prev;
         }
         e=clock();
-        return {prev,double((e-s)/(CLOCKS_PER_SEC*1000))};
+        return {prev,double(e-s)/CLOCKS_PER_SEC*1000};
 
 }
 li helper(li a, li b)
@@ -44,22 +44,22 @@ li helper(li a, li b)
 }
 
 
-pair<li,double> euclidgcd2(li a,li b)
+pair<li,double> euclidgcd1(li a,li b)
 {
         clock_t s = clock();
         li ab = helper(a,b);
         clock_t e = clock();
-        return {ab,double((e-s)/(CLOCKS_PER_SEC*1000))};
+        return {ab,double(e-s)/CLOCKS_PER_SEC*1000};
 }
 
-pair<li,double> euclid3(li a,li b)
+pair<li,double> euclidgcd3(li a,li b)
 {
         clock_t s = clock();
         int t = b;
         if(!(a%t))
         {
                 clock_t e = clock();
-                return {t,double((e-s)/(CLOCKS_PER_SEC*1000))};
+                return {t,double(e-s)/CLOCKS_PER_SEC*1000};
         }
 
         for(int i = t;i>0;--i)
@@ -67,11 +67,58 @@ pair<li,double> euclid3(li a,li b)
                 if(!(a%i) and !(b%i))
                 {
                         clock_t e = clock();
-                        return {i,double((e-s)/(CLOCKS_PER_SEC*1000))};
+                        return {i,double(e-s)/CLOCKS_PER_SEC*1000};
                 }
         }
         clock_t e = clock();
-        return {1,double((e-s)/(CLOCKS_PER_SEC*1000))};
+        return {1,double(e-s)/CLOCKS_PER_SEC*1000};
+}
+bool CheckPrime(long int n) 
+{
+    if (n <= 1)
+        return false;
+
+    if (n <= 3)
+        return true;
+
+    if (n % 2 == 0 || n % 3 == 0)
+        return false;
+
+    for (long int i = 5; i * i <= n; i += 6)
+    {
+        if (n % i == 0 || n % (i + 2) == 0)
+            return false;
+    }
+
+    return true;
+    
+
+}
+
+pair<li, double> euclidgcd4(li a, li b)
+{
+    li aorg = a;
+    li borg = b;
+    clock_t s = clock();
+    li result = 1;
+    for (li i = 2; i * i <= aorg || i * i <= borg; i++)
+    {
+        if (CheckPrime(i))
+        {
+            while (a % i == 0 && b % i == 0)
+            {
+                result *= i;
+                a /= i;
+                b /= i;
+            }
+            while (a % i == 0)
+                a /= i;
+            while (b % i == 0)
+                b /= i;
+        }
+    }
+    clock_t e = clock();
+    return {result, double(e - s) / CLOCKS_PER_SEC * 1000};
 }
 
 void result(){
@@ -84,11 +131,12 @@ void result(){
                 a=b;
                 b=temp;
         }
-        //auto ab = euclidgcd1(a,b);
-        //auto ab = euclidgcd2(a,b);
-        auto ab = euclid3(a,b);
-        cout<<"\n\nGCD = "<<ab.first;
-        cout<<"\ntime taken = "<<ab.second;
+        auto ab = euclidgcd1(a,b);
+        // auto ab = euclidgcd2(a,b);
+        // auto ab = euclidgcd3(a,b);
+        // auto ab = euclidgcd4(a,b);
+        cout<<"\nGCD = "<<ab.first;
+        cout<<"\ntime taken = "<<ab.second<<endl;
 }
 int main()
 {
