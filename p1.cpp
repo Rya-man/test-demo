@@ -52,12 +52,15 @@ pair<li,double> euclidgcd2(li a,li b)
         return {ab,double((e-s)/(CLOCKS_PER_SEC*1000))};
 }
 
-pair<li,double> euclidgcd3(li a,li b)
+pair<li,double> euclid3(li a,li b)
 {
         clock_t s = clock();
         int t = b;
         if(!(a%t))
-                return t;
+        {
+                clock_t e = clock();
+                return {t,double((e-s)/(CLOCKS_PER_SEC*1000))};
+        }
 
         for(int i = t;i>0;--i)
         {
@@ -83,7 +86,7 @@ void result(){
         }
         //auto ab = euclidgcd1(a,b);
         //auto ab = euclidgcd2(a,b);
-        //auto ab = euclidgcd3(a,b);
+        auto ab = euclid3(a,b);
         cout<<"\n\nGCD = "<<ab.first;
         cout<<"\ntime taken = "<<ab.second;
 }
