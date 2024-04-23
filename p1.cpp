@@ -12,7 +12,7 @@ auto initialize = []() {
 }();
 
 
-pair<li,clock_t>  euclidgcd1(li a,li b)
+pair<li,double>  euclidgcd1(li a,li b)
 {
         clock_t s,e;
         s = clock();
@@ -21,7 +21,7 @@ pair<li,clock_t>  euclidgcd1(li a,li b)
         if(!temp)
         {
                 e=clock();
-                return {b,e-s};
+                return {b,double((e-s)/(CLOCKS_PER_SEC*1000))};
         }
         while(temp!= 0)
         {
@@ -30,7 +30,7 @@ pair<li,clock_t>  euclidgcd1(li a,li b)
                 b= prev;
         }
         e=clock();
-        return {prev,(e-s)};
+        return {prev,double((e-s)/(CLOCKS_PER_SEC*1000))};
 
 }
 li helper(li a, li b)
@@ -44,23 +44,46 @@ li helper(li a, li b)
 }
 
 
-pair<li,clock_t> euclidgcd2(li a,li b)
+pair<li,double> euclidgcd2(li a,li b)
 {
         clock_t s = clock();
         li ab = helper(a,b);
         clock_t e = clock();
-        return {ab,(e-s)};
+        return {ab,double((e-s)/(CLOCKS_PER_SEC*1000))};
 }
 
+pair<li,double> euclid3(li a,li b)
+{
+        clock_t s = clock();
+        int t = b;
+        if(!(a%t))
+                return t;
 
+        for(int i = t;i>0;--i)
+        {
+                if(!(a%i) and !(b%i))
+                {
+                        clock_t e = clock();
+                        return {i,double((e-s)/(CLOCKS_PER_SEC*1000))};
+                }
+        }
+        clock_t e = clock();
+        return {1,double((e-s)/(CLOCKS_PER_SEC*1000))};
+}
 
 void result(){
         li a;
         li b;
         cin>>a>>b;
-
-        auto ab = euclidgcd2(a,b);
-
+        if(b>a)
+        {
+                auto temp = a;
+                a=b;
+                b=temp;
+        }
+        //auto ab = euclidgcd1(a,b);
+        //auto ab = euclidgcd2(a,b);
+        //auto ab = euclid3(a,b);
         cout<<"\n\nGCD = "<<ab.first;
         cout<<"\ntime taken = "<<ab.second;
 }
