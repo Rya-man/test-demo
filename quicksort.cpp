@@ -101,13 +101,16 @@ void quicksort(vi& nums,int l,int h)
 
 }
 void result(){
+        clock_t s =clock();
         int n;
         cin>>n;
         vi nums(n);
         inp(nums,nums.size());
         quicksort(nums,0,nums.size()-1);
+        clock_t e =clock();
         cout<<'\n';
         show(nums);
+        cout<<"Time taken:"<<e-s/(CLOCKS_PER_SEC*1000)<<" ms\n";
 }
 
 int main() {

@@ -1,8 +1,10 @@
+#include<bits/stdc++.h>
 #include<iostream>
-#include<vector>
 using namespace std;
 int main()
 {
-    vector<int> a = {1,2,3,4,5};
-    cout<<"\n\n"<<sizeof(a);
+    string asd;
+    cin>>asd;
+    asd +="hello";
+    cout<<asd;
 }
