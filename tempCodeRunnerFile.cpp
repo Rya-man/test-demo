@@ -1,10 +1,6 @@
-#include<bits/stdc++.h>
-#include<iostream>
-using namespace std;
-int main()
-{
-    string asd;
-    cin>>asd;
-    asd +="hello";
-    cout<<asd;
-}
+auto initialize = []() {
+//     ios_base::sync_with_stdio(false);
+//     cin.tie(nullptr);
+//     cout.tie(nullptr);
+//     return 0;
+// }();
