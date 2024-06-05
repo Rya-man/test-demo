@@ -1,6 +1,6 @@
 #include<stdlib.h>
 #include<stdio.h>
-
+#include<limits.h>
 struct Circularqueue {
     int *data;
     int front;
@@ -14,6 +14,7 @@ struct Circularqueue* createqueue(int n) {
     queue->maxsize = n;
     queue->rear = -1;
     queue->front = -1;
+    
     return queue;
 }
 
