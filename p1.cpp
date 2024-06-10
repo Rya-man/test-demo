@@ -84,14 +84,13 @@ bool CheckPrime(long int n)
     if (n % 2 == 0 || n % 3 == 0)
         return false;
 
-    for (long int i = 5; i * i <= n; i += 6)
+    for (long int i = 6; i * i <= n; i += 6)
     {
-        if (n % i == 0 || n % (i + 2) == 0)
+        if (n % (i-1) == 0 || n % (i + 1) == 0)
             return false;
     }
 
     return true;
-    
 
 }
 
@@ -101,7 +100,7 @@ pair<li, double> euclidgcd4(li a, li b)
     li borg = b;
     clock_t s = clock();
     li result = 1;
-    for (li i = 2; i * i <= aorg || i * i <= borg; i++)
+    for (li i = 2; i * i <= aorg and i * i <= borg; i++)
     {
         if (CheckPrime(i))
         {
