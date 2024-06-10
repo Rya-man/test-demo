@@ -78,25 +78,27 @@ ll sum_of_array(vi arr,int n)
 }
 int partition(vi& nums,int l,int h)
 {
-        int pv = nums[h];
-        int i =l-1;
-        for(int j= l;j<=h;++j)
-                if(nums[j]<pv)
-                {
-                        i++;
-                        swap(nums[i],nums[j]);
-                }
-        swap(nums[i+1],nums[h]);
-        return i+1;
+    int m = l + ((h-l)>>1);
+    int pv = nums[m];
+    int i =l;
+    int j=h;
+    while(i<=j)
+    {
+        while(nums[i]<pv)i++;
+        while(nums[j]>pv)j--;
+        if(i<=j)
+        swap(nums[i],nums[j]);
+        i++;j--;
+    }
+    return i;
 }
 void quicksort(vi& nums,int l,int h)
 {
         if(l<h)
         {
-                int pi = partition(nums,l,h);
-
-                quicksort(nums,l,pi-1);
-                quicksort(nums,pi+1,h);
+            int pi = partition(nums,l,h);
+            quicksort(nums,l,pi-1);
+            quicksort(nums,pi,h);
         }
 
 }
@@ -122,7 +124,6 @@ int main() {
         result();
         tc--;
     }
-
     // Your code here
 
     return 0;
