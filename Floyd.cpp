@@ -77,14 +77,14 @@ int diry[8] = {0,1,-1,0,-1,1,-1,1};
 #define REVERSEA(arr,sz) reverse(ALLA(arr,sz))
 #define PERMUTE next_permutation
 #define TC(t) while(t--)
-/*
+
 // Fast I/O
-auto initialize = []() {
-    ios_base::sync_with_stdio(false);
-    cin.tie(nullptr);
-    cout.tie(nullptr);
-    return 0;
-}();
+//auto initialize = []() {
+  //  ios_base::sync_with_stdio(false);
+    //cin.tie(nullptr);
+    //cout.tie(nullptr);
+  //  return 0;
+//}();
 
 // Modular arithmetic
 inline LL mod(LL a, LL m) {
@@ -176,43 +176,76 @@ inline int binsearch(vi arr,int a)
     }
     return -1;
 }
-*/
-int knapsack(int i, vi& weight, vi& profit, const int& w, vector<vector<int>>& dp) {
-    if (i == 0 || w == 0) {
-        return 0;
-    }
 
-    if (dp[i][w] != -1) {
-        return dp[i][w];
-    }
-
-    if (weight[i - 1] > w) {
-        dp[i][w] = knapsack(i - 1, weight, profit, w, dp);
-    } else {
-        dp[i][w] = max(knapsack(i - 1, weight, profit, w, dp),
-                       profit[i - 1] + knapsack(i - 1, weight, profit, w - weight[i - 1], dp));
-    }
-
-    return dp[i][w];
+inline void printshortest(vvi& m)
+{
+	cout<<"The shortest matrix shows the shortest distances between every pair of distances";nl;
+	
+	for(auto&i:m)
+	{
+		for(auto&j:i)
+		{
+			if(j==INF)
+				cout<<"INF ";
+			else
+				cout<<j<<' ';
+		}
+		nl;
+	}
 }
 
-void result() {
-    int n;
-    cout << "Enter the size of array"; nl
-    cin >> n;
-    vi profit(n);
-    vi weight(n);
-    cout << "Enter the Profit for each index"; nl
-    inp(profit, n)
-    cout << "Enter the weight for each index"; nl
-    inp(weight, n)
-    int w;
-    cout << "Enter the weight limit "; cin >> w;
-    vector<vector<int>> dp(n + 1, vector<int>(w + 1, -1));
-    int max_profit = knapsack(n, weight, profit, w, dp); nl
-    cout << "Max profit = \t" << max_profit; nl
-}
+void FloydWarshall(vector<vector<int>>& matrix)
+{
+	int i,j,k;
 
+	for(k=0;k<matrix.size();++k)
+	{
+		for(i=0;i<matrix.size();++i)
+		{
+			for(j=0;j<matrix.size();++j)
+			{
+				if(matrix[i][j] > (matrix[i][k]+matrix[k][j]) and (matrix[k][j] !=INF and matrix[i][k]!=INF))
+					matrix[i][j] = matrix[i][k] + matrix[k][j];
+			}
+		}
+	}
+	printshortest(matrix);
+}
+inline void seter(vvi&m)
+{
+	for(int i =0;i<m.size();++i)
+		m[i][i]=0;
+}
+inline void addedge(vvi& m,int a,int b,int c)
+{
+	if(c<m[a][b])
+	{	m[a][b]=c;
+	//	m[b][a]=c;
+	}
+}
+void result(){
+
+	int V;
+	cout<<"Enter the number of vertices ";
+	cin>>V;
+	int E;
+	cout<<"ENter the number of edges ";
+	cin>>E;nl;
+	cout<<"Enter all the edges with weight ";
+	vvi adj(V,vi(V,INF));
+	seter(adj);
+	while(E--){
+		int a,b,c;
+		cin>>a>>b>>c;
+		addedge(adj,a,b,c);
+	}
+
+	nl;nl;
+	FloydWarshall(adj);
+	nl;
+
+
+}
 
 int main() {
 

@@ -83,7 +83,7 @@ bool isPrime(int n) {
 // Insert edges function
 inline void insert_edges(int a, int b, vector<vector<pair<int, int>>>& adj, int c) {
    adj[a].pb(mp(b, c));
-   adj[b].pb(mp(a, c));
+ //  adj[b].pb(mp(a, c));
 }
 
 
