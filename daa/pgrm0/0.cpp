@@ -7,6 +7,7 @@ using namespace std;
 // Typedefs
 #define nl cout<<'\n';
 typedef vector<int> vi;
+typedef long long li;
 typedef long long LL;
 typedef pair<int,int> pii;
 typedef pair<LL,LL> pll;
@@ -177,15 +178,122 @@ inline int binsearch(vi arr,int a)
     return -1;
 }
 
-void result(){}
 
-int main() {
+pair<li,double>  euclidgcd2(li a,li b)
+{
+        clock_t s,e;
+        s = clock();
+        li temp = a%b;
+        li prev=0;
+        if(!temp)
+        {
+                e=clock();
+                return {b,double(e-s)/CLOCKS_PER_SEC*1000};
+        }
+        while(temp!= 0)
+        {
+                prev = temp;
+                temp = b%temp;
+                b= prev;
+        }
+        e=clock();
+        return {prev,double(e-s)/CLOCKS_PER_SEC*1000};
 
-    int tc;
+}
+li helper(li a, li b)
+{
+
+        li temp = a%b;
+
+        if(!temp)
+                return b;
+        return helper(b,temp);
+}
+
+
+pair<li,double> euclidgcd1(li a,li b)
+{
+        clock_t s = clock();
+        li ab = helper(a,b);
+        clock_t e = clock();
+        return {ab,double(e-s)/CLOCKS_PER_SEC*1000};
+}
+
+pair<li,double> euclidgcd3(li a,li b)
+{
+        clock_t s = clock();
+        int t = b;
+        if(!(a%t))
+        {
+                clock_t e = clock();
+                return {t,double(e-s)/CLOCKS_PER_SEC*1000};
+        }
+
+        for(int i = t;i>0;--i)
+        {
+                if(!(a%i) and !(b%i))
+                {
+                        clock_t e = clock();
+                        return {i,double(e-s)/CLOCKS_PER_SEC*1000};
+                }
+        }
+        clock_t e = clock();
+        return {1,double(e-s)/CLOCKS_PER_SEC*1000};
+}
+
+pair<li, double> euclidgcd4(li a, li b)
+{
+    li aorg = a;
+    li borg = b;
+    clock_t s = clock();
+    li result = 1;
+    for (li i = 2; i * i <= aorg || i * i <= borg; i++)
+    {
+        if (isPrime(i))
+        {
+            while (a % i == 0 && b % i == 0)
+            {
+                result *= i;
+                a /= i;
+                b /= i;
+            }
+            while (a % i == 0)
+                a /= i;
+            while (b % i == 0)
+                b /= i;
+        }
+    }
+    clock_t e = clock();
+    return {result, double(e - s) / CLOCKS_PER_SEC * 1000};
+}
+
+void result(){
+        li a;
+        li b;
+        cin>>a>>b;
+        if(b>a)
+        {
+                auto temp = a;
+                a=b;
+                b=temp;
+        }
+        auto ab = euclidgcd1(a,b);
+        // auto ab = euclidgcd2(a,b);
+        // auto ab = euclidgcd3(a,b);
+        // auto ab = euclidgcd4(a,b);
+        cout<<"\nGCD = "<<ab.first;
+        cout<<"\ntime taken = "<<ab.second<<endl;
+}
+int main()
+{
+        int tc;
     cin>>tc;
-    TC(tc)
+    while(tc)
     {
         result();
+        tc--;
     }
-    return 0;
+
+return 0;
 }
+

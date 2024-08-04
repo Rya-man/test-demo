@@ -1,54 +1,28 @@
+#include<time.h>
 #include <bits/stdc++.h>
 #pragma GCC optimize("O3,unroll-loops")
 #pragma GCC target("avx2,bmi,bmi2,lzcnt,popcnt")
 
+
 using namespace std;
 
-// Typedefs
-#define nl cout<<'\n';
-typedef vector<int> vi;
-typedef long long LL;
-typedef pair<int,int> pii;
-typedef pair<LL,LL> pll;
-typedef pair<string,string> pss;
-typedef vector<vi> vvi;
-typedef vector<pii> vii;
-typedef vector<LL> vl;
-typedef vector<vl> vvl;
-#define ump unordered_map;
-#define ust unordered_set;
-#define pq priority_queue;
-typedef unordered_map<int,int> umpii;
-typedef unordered_map<char,int> umpci;
-typedef unordered_map<int,bool> umpib;
-typedef unordered_set<int> usi;
-typedef unordered_set<char> usc;
 
-// Debugging
-#ifdef TESTING
-  #define DEBUG fprintf(stderr,"====TESTING====\n")
-  #define VALUE(x) cerr << "The value of " << #x << " is " << x << endl
-  #define debug(...) fprintf(stderr, __VA_ARGS__)
-#else
-  #define DEBUG 
-  #define VALUE(x)
-  #define debug(...)
-#endif
+// Typedefs
+#define ll long long
+#define nl cout<<'\n';
+#define vi vector<int>
+#define pii pair<int, int>
 
 
 // Constants
 const int MOD = 1e9 + 7;
 const int INF = INT_MAX;
-double EPS = 1e-9;
-long long INFF = 1000000000000000005LL;
-double PI = acos(-1);
-int dirx[8] = {-1,0,0,1,-1,-1,1,1};
-int diry[8] = {0,1,-1,0,-1,1,-1,1};
+
 
 // Macros
 #define show(arr) for (auto i: arr) {cout << i << ' ';} cout << "\n"
 #define inp(arr,n) for(int i=0;i<n;i++) {cin>> arr[i];}
-#define ALL(v) (v).begin(),(v).end()
+#define all(v) (v).begin(),(v).end()
 #define rall(v) (v).rbegin(),(v).rend()
 #define pb push_back
 #define mp make_pair
@@ -56,27 +30,13 @@ int diry[8] = {0,1,-1,0,-1,1,-1,1};
 #define S second
 #define yes cout<<"YES\n";
 #define no cout<<"NO\n";
-#define FOR(a,b,c) for (int (a)=(b);(a)<(c);++(a))
-#define FORN(a,b,c) for (int (a)=(b);(a)<=(c);++(a))
-#define FORD(a,b,c) for (int (a)=(b);(a)>=(c);--(a))
-#define FORSQ(a,b,c) for (int (a)=(b);(a)*(a)<=(c);++(a))
-#define FORC(a,b,c) for (char (a)=(b);(a)<=(c);++(a))
-#define FOREACH(a,b) for (auto &(a) : (b))
-#define REP(i,n) FOR(i,0,n)
-#define REPN(i,n) FORN(i,1,n)
-#define MAX(a,b) a = max(a,b)
-#define MIN(a,b) a = min(a,b)
-#define SQR(x) ((LL)(x) * (x))
-#define RESET(a,b) memset(a,b,sizeof(a))
-#define mp make_pair
-#define ALLA(arr,sz) arr,arr+sz
-#define SIZE(v) (int)v.size()
-#define SORT(v) sort(ALL(v))
-#define REVERSE(v) reverse(ALL(v))
-#define SORTA(arr,sz) sort(ALLA(arr,sz))
-#define REVERSEA(arr,sz) reverse(ALLA(arr,sz))
-#define PERMUTE next_permutation
-#define TC(t) while(t--)
+// Debugging
+#ifdef LOCAL_DEBUG
+#define debug(x) cerr << #x << " = " << x << endl;
+#else
+#define debug(x)
+#endif
+
 
 // Fast I/O
 auto initialize = []() {
@@ -86,22 +46,25 @@ auto initialize = []() {
     return 0;
 }();
 
+
 // Modular arithmetic
-inline LL mod(LL a, LL m) {
+ll mod(ll a, ll m) {
     return (a % m + m) % m;
 }
 
+
 // Power function with modulo
-inline LL power(LL x, LL y, LL m){
+ll power(ll x, ll y, ll m){
     if (y == 0)
         return 1;
-    LL p = power(x, y / 2, m) % m;
+    ll p = power(x, y / 2, m) % m;
     p = (p * p) % m;
     return (y % 2 == 0) ? p : (x * p) % m;
 }
 
+
 // Prime number check
-inline bool isPrime(int n) {
+bool isPrime(int n) {
     if (n <= 1)
         return false;
     if (n <= 3)
@@ -114,78 +77,138 @@ inline bool isPrime(int n) {
     return true;
 }
 
-//sum of array
-inline LL sum_of_array(vi arr,int n)
+
+ll sum_of_array(vi arr,int n)
 {
-    LL sum =0;
+    ll sum =0;
     for(int i=0;i<n;i++)
         sum+=arr[i];
     return sum;
 }
 
-inline string IntToString(LL a){
-    char x[100];
-    sprintf(x,"%lld",a); string s = x;
-    return s;
-}
 
-inline LL StringToInt(string a){
-    char x[100]; LL res;
-    strcpy(x,a.c_str()); sscanf(x,"%lld",&res);
-    return res;
-}
-
-inline string GetString(void){
-    char x[1000005];
-    scanf("%s",x); string s = x;
-    return s;
-}
-
-inline string uppercase(string s){
-    int n = SIZE(s); 
-    REP(i,n) if (s[i] >= 'a' && s[i] <= 'z') s[i] = s[i] - 'a' + 'A';
-    return s;
-}
-
-inline string lowercase(string s){
-    int n = SIZE(s); 
-    REP(i,n) if (s[i] >= 'A' && s[i] <= 'Z') s[i] = s[i] - 'A' + 'a';
-    return s;
-}
-
-
-inline void OPEN (string s) {
-    #ifndef TESTING
-    freopen ((s + ".in").c_str (), "r", stdin);
-    freopen ((s + ".out").c_str (), "w", stdout);
-    #endif
-}
-
-inline int binsearch(vi arr,int a)
+pair<int,double> linsearch1(vi arr,int n)
 {
-    int l=0,h=SIZE(arr)-1;
-    while(l<=h)
-    {
-        int m=l+(h-l)>>1;
-        if(arr[m]==a)
-            return m;
-        else if(arr[m]>a)
-            h=m-1;
-        else
-            l=m+1;
-    }
-    return -1;
+        clock_t s = clock();
+        for(int i =0;i<arr.size();++i)
+                if(arr[i]==n)
+                {
+                        clock_t e = clock();
+                        return {i,(e-s)};
+                }
+        clock_t e =clock();
+        return {-1,(e-s)};
+}
+int helper(vi& arr,int n,int a)
+{
+        if(a>=arr.size())
+                return -1;
+        if(arr[a]==n)
+                return a;
+        return helper(arr,n,a+1);
+}
+pair<int,double> linsearch2(vi arr,int n)
+{
+        clock_t s = clock();
+        int res =helper(arr,n,0);
+        clock_t e = clock();
+        return {res,(e-s)};
 }
 
-void result(){}
+
+void result1(){
+        int arrsize;
+        cin>>arrsize;
+        vi arr(arrsize);
+        int num;
+        inp(arr,arr.size());
+        cin>>num;
+        //auto res = linsearch1(arr,num);
+        auto res = linsearch2(arr,num);
+        cout<<"\nposition of "<<num<<" : \t"<<res.F;
+        cout<<"\n time taken : \t"<<res.S;
+
+
+}
+
+pair<int,double> binsearch1(vi arr,int n)
+{
+        clock_t s = clock();
+        int l=0;
+        int r=arr.size()-1;
+        int m = l + (r-l)/2;
+
+
+        while(l<=r)
+        {
+                m= l+ (r-l)/2;
+                if(n==arr[m])
+                {
+                        clock_t e =clock();
+                        return {m,(e-s)};
+                }
+                if(n>arr[m])
+                        l=m+1;
+                if(n<arr[m])
+                        r=m-1;
+        }
+
+
+        clock_t e =clock();
+        return {-1,(e-s)};
+}
+int helper(vi& arr,int& n,int l,int r)
+{
+        if(l<=r)
+        {
+                int m = l+ (r-l)/2;
+                if(arr[m]==n)
+                        return m;
+                if(n<arr[m])
+                        return helper(arr,n,l,m-1);
+                if(n>arr[m])
+                        return helper(arr,n,m+1,r);
+        }
+        else
+                return -1;
+}
+pair<int,double> binsearch2(vi arr,int n)
+{
+        clock_t s =clock();
+        int a  = helper(arr,n,0,arr.size());
+        clock_t e =clock();
+        return {a,(e-s)};
+}
+
+
+void result2(){
+        int arrsize;
+        cin>>arrsize;
+        vi arr(arrsize);
+        int num;
+        inp(arr,arr.size());
+        cin>>num;
+//      auto res = binsearch1(arr,num);
+        auto res = binsearch2(arr,num);
+        cout<<"\nposition of "<<num<<" : \t"<<res.F;
+        cout<<"\n time taken : \t"<<res.S;
+
+
+}
+
 
 int main() {
 
+
     int tc;
     cin>>tc;
-    TC(tc)
+    while(tc)
     {
-        result();
+        // result1();
+        result2();
+        tc--;
     }
     return 0;
 }
+
+
