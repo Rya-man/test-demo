@@ -1,6 +1,7 @@
 // C++ code
 //
 #define LED_BUILTIN 5
+//#define LED_BUILTIN D2(node mcu)
 void setup()
 {
   pinMode(LED_BUILTIN, OUTPUT);
