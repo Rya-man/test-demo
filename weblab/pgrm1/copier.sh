@@ -1,0 +1,8 @@
+# cp "homepage.html" "logo.html"
+# cp "homepage.html" "title.html"
+# cp "homepage.html" "home.html"
+cp "home.html" "login.html"
+cp "home.html" "reg.html"
+# cp "homepage.html" "cat.html"
+cp "home.html" "cart.html"
+cp "home.html" "cat.html"
