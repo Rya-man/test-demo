@@ -5,8 +5,7 @@ mkdir partA
 cd partA
 while [ $i -le 7 ]
 do
-	mkdir 'pgrm'$i
-	cp  $2 'pgrm'$i/$i.cpp
+	cp  $2 $i.cpp
 	i=$(($i + 1))
 done
 cd ../
@@ -16,7 +15,6 @@ cd partB
 i=1
 while [ $i -le 6 ]
 do
-	mkdir 'pgrm'$i
-	cp  $2 'pgrm'$i/$i.cpp
+	cp  $2 $i.cpp
 	i=$(($i + 1))
 done
