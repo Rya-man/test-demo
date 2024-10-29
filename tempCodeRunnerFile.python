@@ -1,0 +1,6 @@
+class data:
+    packet = list[str]
+    
+
+print(type(data.packet))
+
