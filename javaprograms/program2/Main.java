@@ -1,29 +1,34 @@
 import java.util.*;
 
-class Main{
-    public static void main(String[] args) {
-        List<Employee> e = new ArrayList<>();
+class Employee{
+    String name;
+    int Emp_id;
+    String dep;
+    int age;
+    String des;
+
+    Employee(String n,int e,String d,int a,String de)
+    {
+        name = n;
+        Emp_id = e;
+        dep = d;
+        age = a;
+        des = de;
     }
 }
-class Employee{
-    public String Name,Department,Designation;
-    public int age,emp_id,salary;
-    public Employee()
-    {
-        Name = "";
-        Department = "";
-        Designation = "";
-        age = 0;
-        emp_id = 0;
-        salary=0;
+
+
+public class Main {
+
+    public static void main(String[] args) {
+        List<Employee> e = new ArrayList<>();
+        e.add(new Employee("alice", 1, "ull", 021, "null"));
+        e.add(new Employee("alice", 1, "ull", 021, "null"));
+        e.add(new Employee("alice", 1, "ull", 021, "null"));
+        e.add(new Employee("alice", 1, "ull", 021, "null"));
+        e.add(new Employee("alice", 1, "ull", 021, "null"));
+
+    
     }
-    public Employee(String n,String d,String D,int a,int e,int s)
-    {
-        Name = n;
-        Department = d;
-        Designation = D;
-        age = a;
-        emp_id = e;
-        salary=s;
-    }
+    
 }

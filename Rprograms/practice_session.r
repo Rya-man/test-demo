@@ -1,20 +1,25 @@
-subtotal=0
+library(dplyr)
+library(ggplot2)
 
-bill = list(list())
+purchase_data = data.frame(
+  CustomerID = c(101, 102, 103, 104, 105),
+  PurchaseAmount = c(150, 200, 120, 300, 80)
+)
 
-for(i in 1:3){
-  name = readline("Enter the name of the prodouct\t");
-  price = as.numeric(readline("ENter the price of the product\t"));
-  quantity = as.numeric((readline("ENter the quantity fo the product\t")))
-  products = list("name"=name,"price"=price,"quantity"=quantity)
-  subtotal = subtotal + (price*quantity)
-  bill[[length(bill)+1]]=products
-}
-st = 1.08*subtotal
-print("Name Price Quantity")
-for(i in bill[2:length(bill)])
-{
-  print(paste(i[1],i[2],i[3]))
-}
-print(paste("total cost = ",subtotal))
-print(paste("total cost after tax = ",st))
+mean_purchase = mean(purchase_data$PurchaseAmount)
+median_purchase = median(purchase_data$PurchaseAmount)
+sd_purchase = sd(purchase_data$PurchaseAmount)
+q1_purchase = quantile(purchase_data$PurchaseAmount, probs = 0.25)
+q3_purchase = quantile(purchase_data$PurchaseAmount, probs = 0.75)
+
+cat("Mean Purchase Amount:", mean_purchase, "\n")
+cat("Median Purchase Amount:", median_purchase, "\n")
+cat("Standard Deviation of Purchase Amounts:", sd_purchase, "\n")
+cat("1st Quartile of Purchase Amounts:", q1_purchase, "\n")
+cat("3rd Quartile of Purchase Amounts:", q3_purchase, "\n")
+
+ggplot(purchase_data, aes(x = PurchaseAmount)) +
+  geom_histogram(binwidth = 50, fill = "blue", color = "black") +
+  labs(title = "Distribution of Purchase Amounts", x = "Purchase Amount", y = "Frequency")
+
+

@@ -1,98 +1,52 @@
-class Buffer {
-    private int[] buffer;
-    private int count = 0, in = 0, out = 0, size;
+import java.util.Scanner;
 
-    public Buffer(int size) {
-        this.size = size;
-        buffer = new int[size];
-        System.out.println("Buffer created with size: " + size);
+abstract class Bank {
+
+    String name;
+    int accno;
+    float bal;
+    public Bank(String n,int a,float b){
+        name = n;
+        accno = a;
+        bal = b;
     }
-
-    public synchronized void produce(int item) throws InterruptedException {
-        // If the buffer is full, wait until there's space
-        while (count == size) {
-            wait();
-        }
-        buffer[in] = item;
-        in = (in + 1) % size;
-        count++;
-        System.out.println("Produced: " + item);
-        notifyAll();
+    public Bank readBank(Scanner s)
+    {
+        System.out.println("Enter name accno and bal");
+        name = s.nextLine();
+        accno = s.nextInt();s.nextLine();
+        bal = s.nextFloat();s.nextLine();
     }
-
-    public synchronized int consume() throws InterruptedException {
-        // If the buffer is empty, wait for items to be produced
-        while (count == 0) {
-            wait();
-        }
-        int item = buffer[out];
-        out = (out + 1) % size;
-        count--;
-        System.out.println("Consumed: " + item);
-        notifyAll();
-        return item;
+    void displayDetails() {
+        System.out.println("Customer Name: " + name);
+        System.out.println("Account Number: " + accno);
+        System.out.println("Balance: " + bal);
+    }
+    abstract float roi();
+}
+class banka extends Bank{
+    banka(String a,int b,float c)
+    {
+        super(a, b, c);
+    }
+    float roi(){
+        return 4*bal;
     }
 }
-
-class Producer extends Thread {
-    private Buffer buffer;
-    private int maxItems;
-
-    public Producer(Buffer buffer, int maxItems) {
-        this.buffer = buffer;
-        this.maxItems = maxItems;
+class bankb extends Bank{
+    bankb(String a,int b,float c)
+    {
+        super(a, b, c);
     }
-
-    @Override
-    public void run() {
-        try {
-            for (int i = 1; i <= maxItems; i++) {
-                buffer.produce(i);
-                Thread.sleep(500); // Simulate time to produce next item
-            }
-        } catch (InterruptedException e) {
-            System.out.println("Producer interrupted.");
-        }
+    float roi(){
+        return 14*bal;
     }
-}
-
-class Consumer extends Thread {
-    private Buffer buffer;
-
-    public Consumer(Buffer buffer) {
-        this.buffer = buffer;
+}class bankc extends Bank{
+    bankc(String a,int b,float c)
+    {
+        super(a, b, c);
     }
-
-    @Override
-    public void run() {
-        try {
-            while (!isInterrupted()) {
-                int item = buffer.consume();
-                Thread.sleep(1000); // Simulate time to process the consumed item
-            }
-        } catch (InterruptedException e) {
-            System.out.println("Consumer interrupted.");
-        }
-    }
-}
-
-public class Main {
-    public static void main(String[] args) throws InterruptedException {
-        int bufferSize = 5;
-        int maxItemsToProduce = 10;
-
-        Buffer buffer = new Buffer(bufferSize);
-
-        Producer producer = new Producer(buffer, maxItemsToProduce);
-        Consumer consumer = new Consumer(buffer);
-
-        producer.start();
-        consumer.start();
-
-        producer.join();
-        consumer.interrupt();
-        consumer.join();
-
-        System.out.println("All done!");
+    float roi(){
+        return 3*bal;
     }
 }

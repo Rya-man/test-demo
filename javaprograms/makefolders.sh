@@ -1,5 +1,5 @@
 i=1
-while [ $i -le 6 ]
+while [ $i -le 12 ]
 do
     mkdir program$i
     cd program$i

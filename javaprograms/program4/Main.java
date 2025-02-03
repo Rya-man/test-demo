@@ -58,7 +58,7 @@ class Student extends Person {
     }
 }
 
-public class four {
+public class Main {
     public static void main(String[] args) {
         Employee emp1 = new Employee("John", 30, "Male", "HR", 60000);
         Employee emp2 = new Employee("Alice", 28, "Female", "Finance", 65000);
